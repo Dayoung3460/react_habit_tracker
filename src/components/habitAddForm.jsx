@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
-class HabitAddForm extends Component {
+// PureComponent는 컴포넌트와 달리 이전의 프롭스와 스테이트를 비교해서 달라진 점이 없으면 re렌더링 하지 않음
+
+class HabitAddForm extends PureComponent {
     inputRef = React.createRef()
 
     onSubmit = (e) => {

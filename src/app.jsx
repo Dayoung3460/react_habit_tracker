@@ -13,21 +13,25 @@ class App extends Component {
   }
 
     handleIncrement = (habit) => {
-        console.log(habit.name)
-        const habits = [
-            ...this.state.habits
-        ]
-        const index = habits.indexOf(habit)
-        habits[index].count++
+        const habits = this.state.habits.map(item => {
+            if(item.id === habit.id) {
+                return { ...habit, count: habit.count + 1 }
+            }
+            return item
+        })
+        // 해빗안에 카운트만 변경됐다고 해서 카운트만 업데이트 시켜주면 리액트는 해빗 오브젝트를 같은 오브젝트로 보기 때문에 렌더링을 안함.
+        // 그래서 this.setState({ habits: habits }) 요렇게 해빗을 오브젝트 자체를 셋스테이트 이용해서 다 업뎃 해줘야됨
         this.setState({ habits: habits })
     }
 
     handleDecrement = (habit) => {
-        const habits = [
-            ...this.state.habits
-        ]
-        const index = habits.indexOf(habit)
-        habits[index].count <= 0 ? habits[index].count = 0 : habits[index].count--
+        const habits = this.state.habits.map(item => {
+            if(item.id === habit.id) {
+                const count = habit.count - 1
+                return { ...habit, count: count < 0 ? 0 : count }
+            }
+            return item
+        })
         this.setState({ habits: habits })
     }
 
@@ -50,7 +54,9 @@ class App extends Component {
 
     handleReset = () => {
         const habits = this.state.habits.map(habit => {
-            habit.count = 0
+            if(habit.count !== 0) {
+                return { ...habit, count: 0 }
+            }
             return habit
         })
         this.setState({ habits })
@@ -69,7 +75,6 @@ class App extends Component {
               onReset={this.handleReset}
           />
         </>
-
     )
   }
 }
