@@ -12,6 +12,14 @@ button {
     font-size: 2rem;
     padding: 1em;
     background-color: blanchedalmond;
+    position: relative;
+}
+
+.navbar a {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    color: green;
 }
 
 .navbar-logo {
@@ -27,7 +35,7 @@ button {
     height: 2.5rem;
     line-height: 2.5rem;
     margin-left: 0.2em;
-    background-color: blue;
+    background-color: green;
     color: white;
     border-radius: 50%;
 }
